@@ -8,6 +8,7 @@ syntax: glob
 *.bak
 #*.off
 *.old
+.vscode
 
 # eclipse conf file
 .settings
