@@ -1,15 +1,29 @@
 package com.decentralizeddatabase.jailcell
 
+import org.eclipse.jetty.server.handler.AbstractHandler
+import org.eclipse.jetty.server.{Server, Request}
+
+import javax.servlet.http.{HttpServletRequest, HttpServletResponse}
+import javax.servlet.ServletException
+
 /**
- * @author ${user.name}
+ * @author Tim Hostetler
  */
 object JailCell {
+    val PORT = 8090
   
-  def foo(x : Array[String]) = x.foldLeft("")((a,b) => a + b)
-  
-  def main(args : Array[String]) {
-    println( "Hello World!" )
-    println("concat arguments = " + foo(args))
-  }
+    def main(args : Array[String]) {
+        val server = new Server(PORT)
+        server.setHandler(new JailCellHandler())
 
+        server.start()
+        server.join()
+    }
+}
+
+class JailCellHandler extends AbstractHandler {
+    def handle(target : String, baseRequest : Request, request : HttpServletRequest, response : HttpServletResponse) {
+        println("Received")
+        baseRequest.setHandled(true)
+    }
 }
