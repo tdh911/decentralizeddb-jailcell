@@ -1,3 +1,4 @@
+blocks/
 *.class
 *.log
 # use glob syntax.
