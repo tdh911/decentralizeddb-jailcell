@@ -1,5 +1,7 @@
 package com.decentralizeddatabase.jailcell
 
+import com.decentralizeddatabase.jailcell.errors._
+
 import org.eclipse.jetty.server.handler.AbstractHandler
 import org.eclipse.jetty.server.{Server, Request}
 
@@ -28,13 +30,27 @@ object JailCell {
 
 class JailCellHandler extends AbstractHandler {
     def handle(target: String, baseRequest: Request, request: HttpServletRequest, response: HttpServletResponse) {
+        val jailCellRequest = extractRequest(request)
+        var jailCellResponse: JailCellResponse = null
+
+        try {
+            jailCellResponse = Dispatcher.dispatch(jailCellRequest)
+        } catch {
+            case e: JailCellError => response.sendError(e.errorCode, e.errorMessage)
+            case _: Throwable => response.sendError(500)
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK)
+        baseRequest.setHandled(true)
+    }
+
+    def extractRequest(request: HttpServletRequest) : JailCellRequest = {
         implicit val formats = DefaultFormats
         val stream: InputStream = request.getInputStream()
         val jsonString: String = Source.fromInputStream(stream).mkString
         val json = parse(jsonString)
         val jailCellRequest = json.extract[JailCellRequest]
-        Dispatcher.dispatch(jailCellRequest)
 
-        baseRequest.setHandled(true)
+        return jailCellRequest
     }
 }
