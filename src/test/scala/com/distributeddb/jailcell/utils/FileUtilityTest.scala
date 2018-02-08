@@ -1,4 +1,4 @@
-package com.decentralizeddatabase.jailcell.utils
+package com.distributeddb.jailcell.utils
 
 import org.scalatest._
 
@@ -14,5 +14,9 @@ class FileUtilityTest extends FlatSpec with Matchers {
 
     "read" should "read the file and return the string" in {
         assert(FileUtility.read(FILENAME) == FILE)
+    }
+
+    "delete" should "remove the file" in {
+        assert(FileUtility.delete(FILENAME))
     }
 }

@@ -1,6 +1,6 @@
-package com.decentralizeddatabase.jailcell
+package com.distributeddb.jailcell
 
-import com.decentralizeddatabase.jailcell.errors._
+import com.distributeddb.jailcell.errors._
 
 import org.eclipse.jetty.server.handler.AbstractHandler
 import org.eclipse.jetty.server.{Server, Request}

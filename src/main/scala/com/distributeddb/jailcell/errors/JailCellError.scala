@@ -1,4 +1,4 @@
-package com.decentralizeddatabase.jailcell.errors
+package com.distributeddb.jailcell.errors
 
 abstract class JailCellError extends Throwable {
     def errorCode: Int

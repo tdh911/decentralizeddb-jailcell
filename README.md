@@ -1,5 +1,5 @@
-# decentralizeddb-jailcell
-Back end service for DecentralizedDB that writes encrypted blocks to file
+# distributeddb-jailcell
+Back end service for DistributedDB that writes encrypted blocks to file
 
 ### Design
 * Accepts Read, Write, or Delete commands
